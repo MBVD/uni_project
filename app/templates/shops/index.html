@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href={% static "app/index.css" %}>
+{% endblock %}
+
+{% block content %}
+    {% for shop in shops %}
+
+        {{ shop.name }}
+
+        {% for product in shop.product_set.all %}
+            {{ product.name }}
+            {{ product.cost }}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

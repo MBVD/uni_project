@@ -3,3 +3,5 @@ django-filter
 psycopg
 psycopg2
 django-money
+django-crispy-forms
+django-bootstrap4
