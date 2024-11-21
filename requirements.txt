@@ -5,3 +5,6 @@ psycopg2
 django-money
 django-crispy-forms
 django-bootstrap-v5
+Faker
+faker
+faker-commerce
