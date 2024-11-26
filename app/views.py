@@ -64,7 +64,7 @@ class ShopsController(TemplateView):
     return context
   
 class PriceController(TemplateView):
-  template_name = "app/shops/pricing.html"
+  template_name = "app/pricing/pricing.html"
   extra_context = {
     "title": "Цены"
   }
@@ -89,7 +89,7 @@ class RegisterUser(CreateView):
 
 class LoginUser(LoginView):
   form_class = LoginUserForm
-  template_name = 'login.html'
+  template_name = 'app/login.html'
   extra_context = {
     'title': 'Авторизация'
   }
