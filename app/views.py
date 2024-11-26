@@ -43,7 +43,7 @@ def create_fake_data(request):
 
 
 class ShopsController(TemplateView):
-  template_name  = "shops/index.html"
+  template_name  = "app/shops/index.html"
   extra_context = {
     "title": 'Домашняя страница'  
   }
@@ -61,6 +61,16 @@ class ShopsController(TemplateView):
     context["page_obj"] = paginator.get_page(page_number)
     context["form"] = form
     # context["shops"] = Shop.objects.all()
+    return context
+  
+class PriceController(TemplateView):
+  template_name = "app/shops/pricing.html"
+  extra_context = {
+    "title": "Цены"
+  }
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
     return context
 
 class RegisterUser(CreateView):

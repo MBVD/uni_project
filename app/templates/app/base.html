@@ -8,8 +8,9 @@
     
     {% block head %}
     {% endblock %}
+    <link rel = "stylesheet" href = {% static "app/headers" %}>
     <link rel="stylesheet" href={% static "app/colors.css" %}>
 </head>
-{% include 'share/header.html' %}
+{% include 'app/share/header.html' %}
 {% block content %}
 {% endblock %}

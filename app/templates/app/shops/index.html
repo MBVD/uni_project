@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'app/base.html' %}
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href={% static "app/index.css" %}>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class = "mx-auto">
-            {% include 'share/pagination.html' %}
+            {% include 'app/share/pagination.html' %}
         </div>
     </div>
     
