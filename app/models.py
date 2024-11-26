@@ -15,7 +15,7 @@ class Shop(models.Model):
 class Product(models.Model):   
   name = models.CharField(max_length=200)   
   cost = MoneyField(max_digits=14, decimal_places=2, default_currency='USD')   
-  shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+  shops = models.ManyToManyField(Shop)
   is_present = models.BooleanField(default=True)
 
 

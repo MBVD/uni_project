@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 def navigation_panel(request):
-    return {"navigation_panel": {"Главная": reverse('index'),
+    return {"navigation_panel": {"Главная": reverse('home'),
             "Предложения": reverse('features'),
             "Цены": reverse('pricing'),
             "О нас": reverse('about_us')}}

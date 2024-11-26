@@ -1,7 +1,7 @@
 <header class="p-3 text-bg-dark">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href={% url 'index' %} class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+      <a href={% url 'home' %} class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
         <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
           <!-- Буква "G" -->
           <text x="50%" y="86%" font-family="Arial, sans-serif" font-size="30" fill="#3498db" text-anchor="middle" alignment-baseline="central">G</text>
@@ -19,14 +19,14 @@
         {% endfor %}
       </ul>
 
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" href = {% url 'index' %} method = 'GET'>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" href = {% url 'home' %} method = 'GET'>
         {% for field in form %}
           {{ field }}
         {% endfor %}
       </form>
 
       <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2">Войти</button>
+        <a href = {% url 'login' %} type="button" class="btn btn-outline-light me-2">Войти</a>
         <button type="button" class="btn btn-warning">Зарегистрироваться</button>
       </div>
     </div>

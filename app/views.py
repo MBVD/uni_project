@@ -4,9 +4,17 @@ from .models import *
 from django.views import View
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
-from .forms import SearchForm
+from .forms import *
 from faker import Faker
 import faker_commerce
+from django.views.generic import *
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView, LogoutView
+from django.core.paginator import Paginator
+from django.db.models import Q
+import random
+
+
 
 # Create your views here
 
@@ -22,15 +30,16 @@ def create_fake_data(request):
                           url = fake.address(),
                           rate = fake.pyint(),
                           is_present = fake.pybool())
-      product = Product.objects.create(name = fake.ecommerce_name(),
-                                        cost = fake.ecommerce_price(),
-                                        shop = shop,
-                                        is_present = True)
+      for __ in range(random.randint(0, 10)):
+        product = Product.objects.create(name = fake.ecommerce_name(),
+                                          cost = fake.ecommerce_price(),
+                                          is_present = True)
+        shop.product_set.add(product)
       product_cost = ProductCost.objects.create(cost_on_date = fake.ecommerce_price(),
                                                 date = fake.date(),
                                                 product = product)
 
-  return redirect('index')
+  return redirect('home')
 
 
 class ShopsController(TemplateView):
@@ -42,10 +51,42 @@ class ShopsController(TemplateView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     form = SearchForm(self.request.GET)
+    page_number = self.request.GET.get("page")
     if form.is_valid():
-      context["shops"] = Shop.objects.filter(name__icontains=form["text"].value())
+      search_text = form.cleaned_data.get("text", "")
+      shops = Shop.objects.filter(Q(name__icontains = search_text) | Q(product__name__icontains = search_text))
     else:
-      context["shops"] = Shop.objects.all()
+      shops = Shop.objects.all()
+    paginator = Paginator(shops, 21)
+    context["page_obj"] = paginator.get_page(page_number)
     context["form"] = form
     # context["shops"] = Shop.objects.all()
     return context
+
+class RegisterUser(CreateView):
+  form_class = RegisterUserForm
+  template_name = 'register.html'
+  success_url = reverse_lazy('home')
+  extra_context = {
+      'title': 'Регистрация'
+  }
+
+  def form_valid(self, form):
+      user = form.save()
+      login(self.request, user)
+      return redirect('home')
+
+
+class LoginUser(LoginView):
+  form_class = LoginUserForm
+  template_name = 'login.html'
+  extra_context = {
+    'title': 'Авторизация'
+  }
+
+  def get_success_url(self):
+      return reverse_lazy('home')
+
+class LogoutUser(LogoutView):
+  template_name = 'logged_out.html'
+  next_page = 'home'
