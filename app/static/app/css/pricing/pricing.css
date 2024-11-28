@@ -1,0 +1,24 @@
+table {
+    border-collapse: initial;
+    border-spacing: 20px 0;
+}
+
+table tr:first-child th.border-column{
+    border-top: 1px solid rgba(0,0,0,.125);;
+    border-radius: 15px 15px 0 0;   
+}
+
+table tr:last-child td.border-column{
+    border-bottom: 1px solid rgba(0,0,0,.125);;
+    border-radius: 0 0 15px 15px; 
+}
+
+table tr td.border-column, th.border-column {
+    border-left: 1px solid rgba(0,0,0,.125);;
+    border-right: 1px solid rgba(0,0,0,.125);;
+    text-align: center;
+}
+
+table .padding-row td{
+    padding: 20px 0;
+}
