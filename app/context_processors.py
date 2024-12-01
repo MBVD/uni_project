@@ -9,3 +9,7 @@ def navigation_panel(request):
             "Предложения": reverse('features'),
             "Цены": reverse('pricing'),
             "О нас": reverse('about_us')}}
+
+
+def current_year(request):
+    return {"current_year": datetime.now().year}
