@@ -9,10 +9,10 @@ class SearchForm(forms.Form):
                                                                                    "aria-label": "Search"}), required=False)
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form_input', 'placeholder': "Имя пользователя"}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form_input', 'placeholder': "Email"}))
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form_input', 'placeholder': "Пароль"}))
-    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class': 'form_input', 'placeholder': "Подтверждение пароля"}))
+    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-control form_input', 'placeholder': "Имя пользователя"}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control form_input', 'placeholder': "Email"}))
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control form_input', 'placeholder': "Пароль"}))
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class': 'form-control form_input', 'placeholder': "Подтверждение пароля"}))
 
     class Meta:
         model = User
@@ -20,5 +20,5 @@ class RegisterUserForm(UserCreationForm):
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form_login_input form_input', 'placeholder': 'Имя'}))
-    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form_password_input form_input', 'placeholder': 'Пароль'}))
+    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-control form_input', 'placeholder': 'Имя пользователя'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control form_input', 'placeholder': 'Пароль'}))

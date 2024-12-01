@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse 
 from .models import *
 from django.views import View
@@ -52,6 +53,14 @@ class ShopsController(TemplateView):
     context = super().get_context_data(**kwargs)
     form = SearchForm(self.request.GET)
     page_number = self.request.GET.get("page")
+    id = self.kwargs.get("id")
+    print("jsdklfjaslkfjaskldfjkaskl")
+    print(id)
+    if id:
+      shop = get_object_or_404(Shop, id=id)
+      self.template_name = "app/shops/show.html"
+      context["shop"] = shop
+      return context
     if form.is_valid():
       search_text = form.cleaned_data.get("text", "")
       shops = Shop.objects.filter(Q(name__icontains = search_text) | Q(product__name__icontains = search_text))
@@ -75,7 +84,7 @@ class PriceController(TemplateView):
 
 class RegisterUser(CreateView):
   form_class = RegisterUserForm
-  template_name = 'register.html'
+  template_name = 'app/login.html'
   success_url = reverse_lazy('home')
   extra_context = {
       'title': 'Регистрация'

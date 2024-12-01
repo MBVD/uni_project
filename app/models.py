@@ -3,7 +3,8 @@ from djmoney.models.fields import MoneyField
 import datetime
 
 class Shop(models.Model):   
-  name = models.CharField(max_length=200, primary_key=True)   
+  id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+  name = models.CharField(max_length=200, unique=True)   
   url = models.CharField(max_length=200)   
   rate = models.IntegerField()  
   is_present = models.BooleanField(default=True)

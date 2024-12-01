@@ -23,7 +23,7 @@
                                 <div class = "d-flex justify-content-between align-items-center">
                                     <div class = "btn-group">
                                         <a href = {{shop.url}} type="button" class="btn btn-sm btn-outline-secondary">Перейти в магазин</a>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary">Просмотреть все товары</a>
+                                        <a type="button" href = "{% url 'shop' id=shop.id %}" class="btn btn-sm btn-outline-secondary">Просмотреть все товары</a>
                                     </div>
                                     <small class="text-muted">{{shop.product_set.all|length}} товар</small>
                                 </div>
