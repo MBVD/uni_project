@@ -91,6 +91,11 @@ class ProductsController(TemplateView):
 
 
 
+class AboutController(TemplateView):
+  template_name = "app/about/about.html"
+  extra_context = {
+    "title": "О нас"
+  }
 
 class PriceController(TemplateView):
   template_name = "app/pricing/pricing.html"
@@ -111,9 +116,9 @@ class RegisterUser(CreateView):
   }
 
   def form_valid(self, form):
-      user = form.save()
-      login(self.request, user)
-      return redirect('home')
+    user = form.save()
+    login(self.request, user)
+    return redirect('home')
 
 
 class LoginUser(LoginView):
@@ -124,8 +129,20 @@ class LoginUser(LoginView):
   }
 
   def get_success_url(self):
-      return reverse_lazy('home')
+    return reverse_lazy('home')
 
 class LogoutUser(LogoutView):
   template_name = 'logged_out.html'
   next_page = 'home'
+
+class CabinetController(TemplateView):
+  template_name = 'app/cabinet/index.html'
+  extra_context = {
+    "title": "Личный кабинет"
+  }
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+
+
+    return context

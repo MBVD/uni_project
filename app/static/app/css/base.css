@@ -1,0 +1,7 @@
+.content {
+    position: relative;
+}
+
+.content > div{
+    padding-bottom: 100px;
+}

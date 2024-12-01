@@ -1,0 +1,51 @@
+{% extends 'app/base.html' %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/about/about.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class = "about_main">
+    <div class = "about_main_left">
+        <div class = "about_title monserat_sanserif">
+            <div style = "display: flex;" class = "image_frame_header">
+                <img src = "{% static 'app/images/people.png' %}" width="200" height="200" style = "margin-right: auto; margin-left: auto;">
+            </div>
+            <div style = "text-align: center;">
+                <h2>О нас</h2>
+                <span class = "about_decription_up">Сайт Gadjet Master поможет вам подобрать оптимальные цены</p>
+            </div>
+        </div>
+    </div>
+    <div class = "about_main_right">
+        <div class = "research monserat_sanserif">
+            <div style = "display: flex;" class = "image_frame">
+                <img src="{% static 'app/images/target.png' %}" width="120" height="120" style = "margin-top: auto; margin-bottom: auto;">
+            </div>
+            <div class = "description">
+                <h3>Цель</h3>
+                <span>Наша основная цель - Сместить неудобную работу по подбору нужных товаров по лучшим ценам и совместить все магазины в единую базу для покупателей</span>
+            </div>
+        </div>
+        <div class = "strategy monserat_sanserif">
+            <div style = "display: flex;" class = "image_frame">
+                <img src="{% static 'app/images/solution.png' %}" width="120" height="120" style = "margin-top: auto; margin-bottom: auto;">
+            </div>
+            <div class = "description">
+                <h3>Решение</h3>
+                <span>Для решения поставленной цели мы подготовили качественный сбор данных, мониторинг цен, рекомендации для покупок</p>
+            </div>
+        </div>
+        <div class = "design monserat_sanserif">
+            <div style = "display: flex;" class = "image_frame">
+                <img src="{% static 'app/images/design.png' %}" width="120" height="120" style = "margin-top: auto; margin-bottom: auto;">
+            </div>
+            <div class = "description">
+                <h3>Дизайн</h3>
+                <span>Удобный интерфейс и понятный функционал</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
