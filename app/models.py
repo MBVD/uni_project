@@ -4,6 +4,7 @@ import datetime
 
 class Shop(models.Model):   
   id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+  image = models.ImageField(upload_to ='uploads/shops', null = True) 
   name = models.CharField(max_length=200, unique=True)   
   url = models.CharField(max_length=200)   
   rate = models.IntegerField()  
@@ -15,7 +16,8 @@ class Shop(models.Model):
   
 class Product(models.Model):   
   name = models.CharField(max_length=200)   
-  cost = MoneyField(max_digits=14, decimal_places=2, default_currency='USD')   
+  cost = MoneyField(max_digits=14, decimal_places=2, default_currency='USD')
+  image = models.ImageField(upload_to ='uploads/products', null = True) 
   shops = models.ManyToManyField(Shop)
   is_present = models.BooleanField(default=True)
 

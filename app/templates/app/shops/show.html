@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class = "container marketing">
+
+        {{ shop.name }}
+        {% for product_row in shop.product_set.all|slice:":3" %}  
+            <div class = "row">
+                <div class = "col-lg-4">
+                    {{product_row.name}}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
