@@ -58,8 +58,11 @@ class ShopsController(TemplateView):
     print(id)
     if id:
       shop = get_object_or_404(Shop, id=id)
+      paginator = Paginator(shop.product_set.all(), 3)
+      page_obj = paginator.get_page(page_number)
       self.template_name = "app/shops/show.html"
       context["shop"] = shop
+      context["page_obj"] = page_obj
       return context
     if form.is_valid():
       search_text = form.cleaned_data.get("text", "")
@@ -72,6 +75,23 @@ class ShopsController(TemplateView):
     # context["shops"] = Shop.objects.all()
     return context
   
+class ProductsController(TemplateView):
+  template_name = "app/product/show.html"
+  extra_context = {
+    "title": 'Магазин'  
+  }
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    id = self.kwargs.get("id")
+    product = get_object_or_404(Product, id=id)
+    context["product"] = product
+
+    return context
+
+
+
+
 class PriceController(TemplateView):
   template_name = "app/pricing/pricing.html"
   extra_context = {
