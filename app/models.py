@@ -13,14 +13,14 @@ class CustomUser(AbstractUser):
   birth_date = models.DateTimeField(verbose_name='Дата рождения', null=True, blank=True)
   groups = models.ManyToManyField(
     'auth.Group',
-    related_name='customuser_set',  # Добавьте related_name
+    related_name='groups',
     blank=True,
     help_text='The groups this user belongs to.',
     verbose_name='groups',
   )
   user_permissions = models.ManyToManyField(
     'auth.Permission',
-    related_name='customuser_set',  # Добавьте related_name
+    related_name='permissions',
     blank=True,
     help_text='Specific permissions for this user.',
     verbose_name='user permissions',
