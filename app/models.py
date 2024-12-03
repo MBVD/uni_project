@@ -1,6 +1,33 @@
 from django.db import models 
 from djmoney.models.fields import MoneyField
 import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
+
+
+class CustomUser(AbstractUser):
+  info = models.TextField(null = True)
+  avatar = models.ImageField(null = True, upload_to = "uploads/users/avatars")
+  phone_number = PhoneNumberField(verbose_name="Номер телефона", null=True, blank=True)
+  birth_date = models.DateTimeField(verbose_name='Дата рождения', null=True, blank=True)
+  groups = models.ManyToManyField(
+    'auth.Group',
+    related_name='customuser_set',  # Добавьте related_name
+    blank=True,
+    help_text='The groups this user belongs to.',
+    verbose_name='groups',
+  )
+  user_permissions = models.ManyToManyField(
+    'auth.Permission',
+    related_name='customuser_set',  # Добавьте related_name
+    blank=True,
+    help_text='Specific permissions for this user.',
+    verbose_name='user permissions',
+  )
+
+  def __str__(self):
+    return self.username
 
 class Shop(models.Model):   
   id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')

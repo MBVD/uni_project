@@ -10,3 +10,5 @@ faker
 faker-commerce
 fontawesomefree
 pillow
+django-phonenumber-field
+phonenumbers
