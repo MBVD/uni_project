@@ -60,6 +60,7 @@
           </div>
 
           <p class="text-center">или</p>
+
           {% for input in form %}
             <div data-mdb-input-init class="form-outline mb-2">
               {{ input }}
@@ -67,6 +68,12 @@
             </div>
 
           {% endfor %}
+
+          <div class = "text-danger">
+            {% if form.errors %}
+              Ошибка заполнения формы
+            {% endif %}
+          </div>
           <div class="row mb-3">
             <div class="col-md-6 d-flex justify-content-center">
               <div class="form-check mb-3 mb-md-0">
