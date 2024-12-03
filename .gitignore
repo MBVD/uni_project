@@ -16,3 +16,4 @@ celerybeat.pid
 .venv
 
 app/uploads/
+media/

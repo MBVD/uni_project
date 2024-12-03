@@ -51,7 +51,7 @@ class ShopsController(TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    form = SearchForm(self.request.GET)
+    search_form = SearchForm(self.request.GET)
     page_number = self.request.GET.get("page")
     id = self.kwargs.get("id")
     print("jsdklfjaslkfjaskldfjkaskl")
@@ -64,14 +64,14 @@ class ShopsController(TemplateView):
       context["shop"] = shop
       context["page_obj"] = page_obj
       return context
-    if form.is_valid():
-      search_text = form.cleaned_data.get("text", "")
+    if search_form.is_valid():
+      search_text = search_form.cleaned_data.get("text", "")
       shops = Shop.objects.filter(Q(name__icontains = search_text) | Q(product__name__icontains = search_text))
     else:
       shops = Shop.objects.all()
     paginator = Paginator(shops, 21)
     context["page_obj"] = paginator.get_page(page_number)
-    context["form"] = form
+    context["search_form"] = search_form
     # context["shops"] = Shop.objects.all()
     return context
   
@@ -135,14 +135,19 @@ class LogoutUser(LogoutView):
   template_name = 'logged_out.html'
   next_page = 'home'
 
-class CabinetController(TemplateView):
+class CabinetController(FormView):
   template_name = 'app/cabinet/index.html'
+  form_class = CustomUserChangeForm
+  success_url = reverse_lazy("home")
   extra_context = {
     "title": "Личный кабинет"
   }
 
+  def form_valid(self, form):
+    form.save()
+    return super().form_valid(form)
+
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-
 
     return context

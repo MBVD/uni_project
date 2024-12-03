@@ -3,17 +3,26 @@
 
 {% block content %}
     <div class = "container">
-        <div class = "row">
-            <div class = "col-lg-4 left-info">
-                <div class = "rounded-circle">
-                    <img src="{{ user.avatar }}" alt="">
-                    {{ user.username }} 
-                    {{ user.about }}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class = "row">
+                <div class = "col-lg-4 left-info">
+                    <div class = "avatar form">
+                        <img src="{{ user.avatar.url }}" class = "bd-placeholder-img rounded-circle" alt="">
+                        {{ form.avatar }}
+                    </div>
+                </div>
+                <div class = "col-lg-2 right-info">
+                    <div>
+                    {{ user.phone_number }}
+                    </div>
+                    {{ form.phone_number }}
+
+                    {{ form.birth_date }}
                 </div>
             </div>
-            <div class = "col-lg-2 right-info">
-
-            </div>
-        </div>
+            <button type = "submit"> Изменить </button>
+            {{ form.errors}}
+        </form>
     </div>
 {% endblock %}

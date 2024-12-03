@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.contrib.admin.widgets import AdminDateWidget
+from .models import *
 
 class SearchForm(forms.Form):
     text = forms.CharField(label="", max_length=256, widget=forms.TextInput(attrs={"class": "form-control form-control-dark text-bg-dark", 
@@ -22,3 +24,13 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-control form_input', 'placeholder': 'Имя пользователя'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control form_input', 'placeholder': 'Пароль'}))
+
+
+class CustomUserChangeForm(forms.ModelForm):
+    avatar = forms.ImageField(label='Новая аватарка пользователя', widget=forms.FileInput())
+    class Meta:
+        model = CustomUser
+        fields = ['phone_number', 'birth_date']
+        widgets = {
+            'birth_date': AdminDateWidget(attrs={'type': 'date'}),
+        }

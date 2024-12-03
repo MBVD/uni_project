@@ -20,7 +20,7 @@
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" href = {% url 'home' %} method = 'GET'>
-        {% for field in form %}
+        {% for field in search_form %}
           {{ field }}
         {% endfor %}
       </form>
