@@ -27,10 +27,9 @@ class LoginUserForm(AuthenticationForm):
 
 
 class CustomUserChangeForm(forms.ModelForm):
-    avatar = forms.ImageField(label='Новая аватарка пользователя', widget=forms.FileInput())
     class Meta:
         model = CustomUser
-        fields = ['phone_number', 'birth_date']
+        fields = ['avatar', 'phone_number', 'birth_date']
         widgets = {
-            'birth_date': AdminDateWidget(attrs={'type': 'date'}),
+            'birth_date' : AdminDateWidget(attrs = {"type" : "date"}, format = "%Y-%m-%d"),
         }

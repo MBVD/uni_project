@@ -143,8 +143,17 @@ class CabinetController(FormView):
     "title": "Личный кабинет"
   }
 
+  def get_form_kwargs(self):
+    kwargs = super().get_form_kwargs()
+    kwargs['instance'] = self.request.user
+    return kwargs
+
   def form_valid(self, form):
-    form.save()
+    if form.is_valid:
+      form.save()
+    else:
+      print(form.errors)
+      print("jsdkdfjasf")
     return super().form_valid(form)
 
   def get_context_data(self, **kwargs):
