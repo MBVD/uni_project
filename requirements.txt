@@ -12,3 +12,5 @@ fontawesomefree
 pillow
 django-phonenumber-field
 phonenumbers
+celery
+redis
