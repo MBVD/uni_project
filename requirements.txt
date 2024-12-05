@@ -14,3 +14,5 @@ django-phonenumber-field
 phonenumbers
 celery
 redis
+requests
+bs4
