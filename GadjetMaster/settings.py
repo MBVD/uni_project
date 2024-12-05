@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from django.utils.translation import gettext_lazy
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -154,3 +156,10 @@ AUTH_USER_MODEL = "app.CustomUser"
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+# CELERY_BEAT_SCHEDULE = {
+#     "every-20-seconds": {
+#         "task": "app.tasks.add",
+#         "schedule": 20.0,
+#         "args": (1, 2), 
+#     }
+# }
