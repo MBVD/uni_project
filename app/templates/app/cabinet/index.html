@@ -1,31 +1,44 @@
 {% extends 'app/base.html' %}
 
 
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/cabinet/index.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class = "container">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class = "row">
-                <div class = "col-lg-4 left-info">
-                    <div class = "avatar form">
-                        {% if user.avatar %}
-                            <img src="{{ user.avatar.url }}" class = "bd-placeholder-img rounded-circle" alt="">
-                        {% endif %}
-                        {{ form.avatar }}
+        <div class = "user form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class = "row">
+                    <div class = "col-lg-4 left-info">
+                        <div class = "avatar-info">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" class = "bd-placeholder-img rounded-circle" alt="">
+                            {% endif %}
+                            <div class = "avatar-form">
+                                <div class = "form-group">
+                                    {{ form.avatar }}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "col-lg-2 right-info">
+                        <div class = "form-group">
+                            {{ form.label }}
+                            {{ form.phone_number }}
+                        </div>
+                        <div class = "form-group">
+                            {{ form.label }}
+                            {{ form.birth_date }}
+                        </div>
+                        <button type = "submit" class = "btn btn-warning"> Изменить </button>
                     </div>
                 </div>
-                <div class = "col-lg-2 right-info">
-                    <div>
-                    {{ user.phone_number }}
-                    </div>
-                    {{ form.phone_number }}
-
-                    {{ user.birth_date }}
-                    {{ form.birth_date }}
-                </div>
-            </div>
-            <button type = "submit"> Изменить </button>
-            {{ form.errors}}
-        </form>
+                {{ form.errors}}
+            </form>
+        </div>
     </div>
 {% endblock %}

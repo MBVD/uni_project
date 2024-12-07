@@ -31,5 +31,8 @@ class CustomUserChangeForm(forms.ModelForm):
         model = CustomUser
         fields = ['avatar', 'phone_number', 'birth_date']
         widgets = {
-            'birth_date' : AdminDateWidget(attrs = {"type" : "date"}, format = "%Y-%m-%d"),
+            'birth_date' : forms.DateInput(attrs = {"type" : "date", "class" : "form-control"}, format = "%Y-%m-%d"),
+            'phone_number': forms.TextInput(attrs = {"type": "tel", "class" : "form-control", 
+                                                     "data-mdb-input-mask-init": "", 
+                                                     "data-mdb-input-mask": "+48 999-999-999"}),
         }
