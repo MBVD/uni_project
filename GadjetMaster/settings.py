@@ -156,10 +156,10 @@ AUTH_USER_MODEL = "app.CustomUser"
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
-# CELERY_BEAT_SCHEDULE = {
-#     "every-20-seconds": {
-#         "task": "app.tasks.add",
-#         "schedule": 20.0,
-#         "args": (1, 2), 
-#     }
-# }
+CELERY_BEAT_SCHEDULE = {
+    "every-20-seconds": {
+        "task": "app.tasks.parse_technodom",
+        "schedule": crontab(minute = "0", hour = "0", day_of_month = "*", month_of_year = "*", day_of_week = '0'),
+        # "args": (1, 2), 
+    }
+}

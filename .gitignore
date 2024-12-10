@@ -17,3 +17,5 @@ celerybeat.pid
 
 app/uploads/
 media/
+
+celery*

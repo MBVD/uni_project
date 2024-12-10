@@ -54,8 +54,6 @@ class ShopsController(TemplateView):
     search_form = SearchForm(self.request.GET)
     page_number = self.request.GET.get("page")
     id = self.kwargs.get("id")
-    print("jsdklfjaslkfjaskldfjkaskl")
-    print(id)
     if id:
       shop = get_object_or_404(Shop, id=id)
       paginator = Paginator(shop.product_set.all(), 3)
