@@ -49,6 +49,7 @@ class TechnodomParser:
                 print(product_data)
 
                 if not self.is_duplicate(product_data):
+                    yield product_data
                     self.product_data_list.append(product_data)
 
             except AttributeError:
@@ -65,15 +66,14 @@ class TechnodomParser:
 
             if response.status_code != 200:
                 print(f"Ошибка: не удалось загрузить страницу, код состояния {response.status_code}")
-                return
-            
+                yield             
             soup = BeautifulSoup(response.text, 'html.parser')
 
             
             for link in soup.find_all('a', href=True):
                 href = link['href']
                 if '/p/' in href:
-                    self.parse_product_page(self.url + href)
+                    yield from self.parse_product_page(self.url + href)
             
 
         except requests.RequestException as e:
@@ -97,7 +97,7 @@ class TechnodomParser:
 
                     parent_div = link.find_parent('div', class_ = 'Header_content__Qa_y3 Header_sticky__2DSLL MiddleContent_block__ztkbQ')
                     if not parent_div:
-                        self.parse_inner_catalog(self.url + href)
+                        yield from self.parse_inner_catalog(self.url + href)
 
         except requests.RequestException as e:
             print(f"Ошибка при запросе: {e}")

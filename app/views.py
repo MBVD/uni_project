@@ -64,10 +64,10 @@ class ShopsController(TemplateView):
       return context
     if search_form.is_valid():
       search_text = search_form.cleaned_data.get("text", "")
-      shops = Shop.objects.filter(Q(name__icontains = search_text) | Q(product__name__icontains = search_text))
+      shops = Shop.objects.filter(Q(name__icontains = search_text) | Q(product__name__icontains = search_text)).distinct()
     else:
       shops = Shop.objects.all()
-    paginator = Paginator(shops, 21)
+    paginator = Paginator(shops.order_by('name'), 21)
     context["page_obj"] = paginator.get_page(page_number)
     context["search_form"] = search_form
     # context["shops"] = Shop.objects.all()
