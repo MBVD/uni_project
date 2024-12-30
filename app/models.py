@@ -44,7 +44,7 @@ class Shop(models.Model):
 class Product(models.Model):   
   name = models.CharField(max_length=255)
   description = models.TextField(null = True)   
-  cost = MoneyField(max_digits=14, decimal_places=2, default_currency='USD')
+  cost = MoneyField(max_digits=14, decimal_places=2, default_currency='KZT')
   image = models.ImageField(upload_to ='uploads/products', null = True) 
   shops = models.ManyToManyField(Shop)
   specs = models.JSONField(null = True)

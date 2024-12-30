@@ -14,7 +14,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.core.paginator import Paginator
 from django.db.models import Q
 import random
-
+from .tasks import *
 
 
 # Create your views here
@@ -26,19 +26,7 @@ def create_fake_data(request):
     shops = Shop.objects.all()
     shops.delete()
   if "create" in request.GET.keys() and request.GET["create"] == "1":
-    for _ in range(100):
-      shop = Shop.objects.create(name = fake.company(),
-                          url = fake.address(),
-                          rate = fake.pyint(),
-                          is_present = fake.pybool())
-      for __ in range(random.randint(0, 10)):
-        product = Product.objects.create(name = fake.ecommerce_name(),
-                                          cost = fake.ecommerce_price(),
-                                          is_present = True)
-        shop.product_set.add(product)
-      product_cost = ProductCost.objects.create(cost_on_date = fake.ecommerce_price(),
-                                                date = fake.date(),
-                                                product = product)
+    parse_technodom.apply_async()
 
   return redirect('home')
 

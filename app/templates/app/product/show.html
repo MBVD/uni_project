@@ -6,9 +6,29 @@
 
 {% block content %}
     <div class = "container">
-        <div class = "row"> 
-            
+        <div class = "row">
+            <div class = "row col-10">
+                <div class = "row mt-5"> 
+                    <div class = "col-2">
+                        <img src = "{{product.image.url}}" class = "w-100 h-100">
+                    </div>
+                    <div class = "col-8 full-desctiption">
+                        <div class = "product-name">
+                            {{ product.name }}
+                        </div>
+                        <div class = "product-specs">
+                            Характеристики :
+                            {% for spec_name, spec_value in product.specs.items %}
+                                {{ spec_name }} - {{ spec_value }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-2">
+                {{ product.cost }}
+                {{ product.productcost_set.last.cost_on_date }}   
+            </div>
         </div>
-
     </div>
 {% endblock %}

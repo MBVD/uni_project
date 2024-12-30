@@ -6,6 +6,7 @@ from .models import *
 import requests
 import re
 from urllib.parse import urlparse
+import datetime
 
 
 logger = get_task_logger(__name__)\
@@ -27,6 +28,10 @@ def sync_data(data):
                                         specs = product_data["specs"],
                                         is_present = True,
                                         )
+    cost = ProductCost.objects.create(cost_on_date = re.sub(r'[^\d.]', '', product_data["price"]),
+                                      date = datetime.date.today(),
+                                      product = product
+                                     )
     product.shops.add(shop)
 
 @shared_task
